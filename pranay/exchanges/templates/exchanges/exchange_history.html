@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+<!-- ==========================================
+     PRANAY'S PART
+     Exchange and matching frontend
+=========================================== -->
+{% block title %}Exchange history | SkillSwap{% endblock %}
+{% block content %}
+{% include 'includes/workspace_nav.html' %}<header class="page-heading"><div><span class="eyebrow">LOOK HOW FAR YOU’VE COME</span><h1>Exchange history</h1><p>New skills, shared stories and a little more confidence.</p></div></header><section class="grid grid-two" aria-label="Completed exchanges">{% for exchange in completed_exchanges %}{% include 'includes/history_card.html' %}{% empty %}{% if demo_mode %}{% include 'includes/history_card.html' %}{% else %}{% url 'matches' as matches_url %}{% include 'includes/empty_state.html' with title='Your learning story starts here.' description='Completed exchanges will appear here. Find your first learning partner.' action_url=matches_url action_label='Find a match' %}{% endif %}{% endfor %}</section>{% include 'includes/pagination.html' %}
+{% endblock %}
