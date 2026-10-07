@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+<!-- ==========================================
+     PRANAY'S PART
+     Exchange and matching frontend
+=========================================== -->
+{% block title %}Your matches | SkillSwap{% endblock %}
+{% block content %}
+{% include 'includes/workspace_nav.html' %}<header class="page-heading"><div><span class="eyebrow">TWO-WAY LEARNING. ENDLESS POSSIBILITY.</span><h1>Meet your matches</h1><p>People who can teach what you want to learn, and learn what you can teach.</p></div></header><div class="info-banner">✦ <span>Matches bring complementary skills together. Find someone you’d enjoy learning with.</span></div><section class="grid grid-three" aria-label="Your matches">{% for match in matches %}{% include 'includes/match_card.html' %}{% empty %}{% if demo_mode %}{% include 'includes/match_card.html' with name='Ankon' percentage=95 sample_id=2 %}{% include 'includes/match_card.html' with name='Pranay' teach='Python' learn='English' percentage=87 sample_id=3 %}{% include 'includes/match_card.html' with name='Nadia' teach='Python' learn='Photography' percentage=80 sample_id=4 %}{% else %}{% url 'add_skill' as add_url %}{% include 'includes/empty_state.html' with title='No matches found yet.' description='Try adding more skills to improve your matches.' action_url=add_url action_label='Add a skill' %}{% endif %}{% endfor %}</section>{% include 'includes/pagination.html' %}
+{% endblock %}
