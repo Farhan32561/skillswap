@@ -1,0 +1,7 @@
+{% with name=name|default:'' offered=offered|default:'' rating=rating|default:'' sample_id=sample_id|default:'' wanted=wanted|default:'' %}
+<article class="card person-card"><div class="card-top"><span class="avatar" aria-hidden="true">{{ person.first_name|default:name|default:'Ankon'|slice:':1' }}</span><span class="rating">★ {{ person.rating|default:rating|default:'—' }} <span class="small">/ 5</span></span></div>
+<h3>{{ person.get_full_name|default:name|default:'Ankon' }}</h3><p class="small">{{ person.location|default:'Location not set' }}</p>
+<div class="exchange-pair"><div><span>Can teach</span><strong>{{ person.offered_skill|default:offered|default:'Photoshop' }}</strong></div><div><span>Wants to learn</span><strong>{{ person.wanted_skill|default:wanted|default:'Django' }}</strong></div></div>
+<div class="card-actions"><a class="button button-outline" href="{% url 'user_profile' person.pk|default:sample_id|default:2 %}">View Profile</a><form method="post" action="{% url 'send_exchange_request' person.pk|default:sample_id|default:2 %}">{% csrf_token %}<button class="button" type="submit" {% if demo_mode %}disabled{% endif %}>Request Exchange</button></form></div></article>
+
+{% endwith %}

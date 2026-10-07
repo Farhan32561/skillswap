@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+<!-- ==========================================
+     FARHAN'S PART
+     Accounts, profiles and shared frontend
+=========================================== -->
+{% block title %}Log in | SkillSwap{% endblock %}
+{% block content %}
+<section class="auth-layout"><aside class="auth-story"><span class="eyebrow">LEARN. SHARE. BELONG.</span><h1>A new skill.<br>A new connection.<br>A new possibility.</h1><p>The best things you know could be the beginning of someone else’s journey.</p><div class="auth-art" aria-hidden="true"><span>Learn</span><strong>⇄</strong><span>Teach</span></div><p class="small">Built for curious people, just like you.</p></aside><div class="auth-form"><span class="eyebrow">GOOD TO SEE YOU AGAIN</span><h2>Welcome back.</h2><p>Ready to learn something new?</p><form method="post" action="{% url 'login' %}">{% csrf_token %}{% include 'includes/form_errors.html' %}<div class="field"><label for="username">Username or email</label><input id="username" name="username" type="text" required autocomplete="username" value="{{ form.username.value|default_if_none:"" }}"></div><div class="field"><label for="password">Password</label><input id="password" name="password" type="password" required autocomplete="current-password" value=""></div><label class="checkbox-label"><input type="checkbox" name="remember_me"> Remember me</label><button class="button button-full" type="submit" {% if demo_mode %}disabled{% endif %}>Log in →</button></form><p class="auth-switch">Don’t have an account? <a href="{% url 'register' %}">Create one</a></p></div></section>
+{% endblock %}

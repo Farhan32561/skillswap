@@ -1,0 +1,4 @@
+{% with category=category|default:'' level=level|default:'' name=name|default:'' sample_id=sample_id|default:'' %}
+<article class="card"><div class="card-top"><span class="skill-icon" aria-hidden="true">✦</span><span class="badge badge-neutral">{{ skill.get_category_display|default:category|default:'Programming' }}</span></div><h3>{{ skill.name|default:name|default:'Django' }}</h3><p>{{ skill.get_level_display|default:level|default:'Intermediate' }}</p><div class="card-actions"><a class="button button-outline" href="{% url 'edit_skill' skill.pk|default:sample_id|default:1 %}">Edit</a><form method="post" action="{% url 'remove_skill' skill.pk|default:sample_id|default:1 %}">{% csrf_token %}<button class="button button-danger" type="submit" {% if demo_mode %}disabled{% endif %}>Remove<span class="sr-only"> {{ skill.name|default:name }}</span></button></form></div></article>
+
+{% endwith %}

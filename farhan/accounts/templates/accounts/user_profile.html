@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+<!-- ==========================================
+     FARHAN'S PART
+     Accounts, profiles and shared frontend
+=========================================== -->
+{% block title %}Community profile | SkillSwap{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'search_skills' %}">← Find people</a>{% if profile or demo_mode %}{% include 'includes/profile_content.html' with own_profile=False %}{% else %}{% include 'includes/empty_state.html' with title='This profile is unavailable.' description='Explore the community to find another learning partner.' %}{% endif %}
+{% endblock %}

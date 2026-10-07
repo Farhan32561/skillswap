@@ -1,0 +1,25 @@
+{% load static %}
+<!-- ==========================================
+     FARHAN'S PART
+     Accounts, profiles and shared frontend
+=========================================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SkillSwap connects people to exchange knowledge, learn new skills and grow together.">
+  <title>{% block title %}SkillSwap — Learn together. Grow together.{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  {% include 'includes/navbar.html' %}
+  <main id="main-content" class="container" tabindex="-1">
+    {% if demo_mode %}<div class="demo-notice">Design preview · Profiles, statistics and exchanges below are sample data.</div>{% endif %}
+    {% if messages %}<div class="messages" aria-live="polite">{% for message in messages %}<div class="message {{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  {% include 'includes/footer.html' %}
+</body>
+</html>

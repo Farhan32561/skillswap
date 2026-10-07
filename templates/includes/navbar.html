@@ -1,0 +1,8 @@
+<header class="site-header">
+  <div class="container nav-shell">
+    <a class="brand" href="{% url 'home' %}" aria-label="SkillSwap home"><span class="brand-symbol" aria-hidden="true">⇄</span>SkillSwap<span class="brand-dot">.</span></a>
+    <nav class="desktop-nav" aria-label="Main navigation">{% include 'includes/nav_links.html' %}</nav>
+    <div class="nav-account">{% include 'includes/account_links.html' %}</div>
+    <details class="mobile-menu"><summary>Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation">{% include 'includes/nav_links.html' %}{% include 'includes/account_links.html' %}</nav></details>
+  </div>
+</header>

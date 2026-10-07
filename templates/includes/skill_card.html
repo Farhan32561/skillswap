@@ -1,0 +1,11 @@
+{% with category=category|default:'' description=description|default:'' level=level|default:'' name=name|default:'' person=person|default:'' sample_id=sample_id|default:'' skill_type=skill_type|default:'' %}
+<article class="card skill-card">
+<div class="card-top"><span class="skill-icon" aria-hidden="true">{{ icon|default:'✦' }}</span><span class="badge">{{ skill.get_skill_type_display|default:skill_type|default:'Can Teach' }}</span></div>
+<span class="eyebrow muted">{{ skill.get_category_display|default:category|default:'Programming' }}</span>
+<h3><a href="{% if skill %}{% url 'skill_detail' skill.skill.pk|default:skill.pk %}{% else %}{% url 'skill_detail' sample_id|default:1 %}{% endif %}">{{ skill.name|default:name|default:'Django' }}</a></h3>
+<p>{{ skill.description|default:description|default:'Build practical skills, one conversation at a time.'|truncatewords:18 }}</p>
+<div class="person-line"><span class="avatar avatar-small" aria-hidden="true">{% if skill %}{{ skill.owner.first_name|default:skill.owner.username|slice:':1' }}{% else %}{{ person|default:'F'|slice:':1' }}{% endif %}</span><div><strong>{% if skill %}{{ skill.owner.get_full_name|default:skill.owner.username }}{% else %}{{ person|default:'Farhan Ahmed' }}{% endif %}</strong><span>{{ skill.get_level_display|default:level|default:'Intermediate' }}</span></div></div>
+<a class="button button-outline button-full" href="{% url 'user_profile' skill.owner.pk|default:sample_id|default:1 %}">View Profile <span aria-hidden="true">↗</span></a>
+</article>
+
+{% endwith %}

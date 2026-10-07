@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+<!-- ==========================================
+     FARHAN'S PART
+     Accounts, profiles and shared frontend
+=========================================== -->
+{% block title %}My profile | SkillSwap{% endblock %}
+{% block content %}
+{% include 'includes/workspace_nav.html' %}{% if profile or demo_mode %}{% include 'includes/profile_content.html' with own_profile=True %}{% else %}{% url 'edit_profile' as edit_url %}{% include 'includes/empty_state.html' with title='Make yourself at home.' description='Add your profile details to introduce yourself to the community.' action_url=edit_url action_label='Create your profile' %}{% endif %}
+{% endblock %}

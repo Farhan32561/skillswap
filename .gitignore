@@ -1,0 +1,15 @@
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+db.sqlite3
+.env
+media/
+staticfiles/
+
+# Local environment variants and private key files
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
