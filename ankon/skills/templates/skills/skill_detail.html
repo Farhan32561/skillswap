@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+<!-- ==========================================
+     ANKON'S PART
+     Skills management frontend
+=========================================== -->
+{% block title %}Skill details | SkillSwap{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'skills' %}">← Browse skills</a>{% if skill or demo_mode %}<header class="detail-hero"><span class="skill-icon large-icon" aria-hidden="true">✦</span><div><span class="eyebrow">{{ skill.get_category_display|default:'Programming' }}</span><h1>{{ skill.name|default:'Django' }}</h1><p>{{ skill.description|default:'Build secure, practical web applications with Django. Learn the fundamentals of models, views and templates through projects you can be proud of.' }}</p></div></header><section class="section"><div class="section-heading"><div><h2>People Who Can Teach This Skill</h2><p>Your next teacher could also be your next student.</p></div></div><div class="grid grid-three">{% for person in teachers %}{% include 'includes/person_card.html' %}{% empty %}{% if demo_mode %}{% include 'includes/person_card.html' with name='Farhan Ahmed' offered='Django' wanted='Photoshop' sample_id=1 %}{% include 'includes/person_card.html' with name='Pranay' offered='Django' wanted='English' sample_id=3 %}{% else %}{% include 'includes/empty_state.html' with title='No teachers available yet.' description='Check back soon as the community grows.' %}{% endif %}{% endfor %}</div></section>{% else %}{% include 'includes/empty_state.html' with title='This skill is unavailable.' %}{% endif %}
+{% endblock %}
