@@ -158,7 +158,7 @@ python manage.py test tests.integration
 
 Django creates and destroys `test_<MONGODB_NAME>` for this suite. Use a development/test database account with the necessary permissions. Tests cover registration/login, profile updates and invalid uploads, skill ownership and duplicates, filtered searches, matching, reciprocal request validation, duplicate-pair indexes, transitions, review rules, rendering of real objects and seed idempotency. Do not point integration tests at a database named `test_<MONGODB_NAME>` that contains data you want to retain.
 
-Current verification: 26 tests passed after the team-folder restructuring, including database integration tests against Atlas in a separate temporary test database. All 85 template renders passed. `check` passes, `makemigrations --check --dry-run` reports no changes, `migrate` reports no pending migrations, and `runserver` serves the site. Existing user/profile records were preserved during a one-time reconciliation of missing initial migration records. See [TEAM_STRUCTURE.md](TEAM_STRUCTURE.md) for the complete report and Git workflows.
+
 
 ## Frontend preservation and file changes
 
