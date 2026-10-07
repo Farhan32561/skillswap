@@ -26,11 +26,29 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'development-only-skillswap-change-before-deployment')
-DEBUG = os.getenv('DJANGO_DEBUG', 'True').lower() == 'true'
-ALLOWED_HOSTS = [host.strip() for host in os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,[::1]').split(',') if host.strip()]
-if not DEBUG and SECRET_KEY == 'development-only-skillswap-change-before-deployment':
-    raise ImproperlyConfigured('Set DJANGO_SECRET_KEY before disabling DEBUG.')
+# Keep the legacy key as a fallback so existing sessions remain valid.
+SECRET_KEY = os.getenv('SECRET_KEY', os.getenv(
+    'DJANGO_SECRET_KEY', 'development-only-skillswap-change-before-deployment'
+))
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '[::1]',
+    'skillswap-bay-two.vercel.app',
+    '.vercel.app',
+]
+# Additional custom hosts must not replace the local and Vercel defaults.
+ALLOWED_HOSTS += [
+    host.strip() for host in os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
+    if host.strip()
+]
+CSRF_TRUSTED_ORIGINS = [
+    'https://skillswap-bay-two.vercel.app',
+    'https://*.vercel.app',
+]
+if not DEBUG and (not SECRET_KEY or SECRET_KEY == 'development-only-skillswap-change-before-deployment'):
+    raise ImproperlyConfigured('Set SECRET_KEY before disabling DEBUG.')
 
 # Application definition
 

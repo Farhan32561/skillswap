@@ -61,11 +61,13 @@ python manage.py runserver
 ```dotenv
 MONGODB_URI=your_mongodb_atlas_connection_string_here
 MONGODB_NAME=skillswap
-DJANGO_DEBUG=True
+DEBUG=True
 DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,[::1]
 ```
 
-Settings load `.env` with `load_dotenv(BASE_DIR / '.env')`. Process environment variables take precedence. `.env` and uploaded media are ignored by Git. Before deployment, set a random `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=False`, and your actual hosts; configure static/media serving and HTTPS for your deployment.
+Settings load `.env` with `load_dotenv(BASE_DIR / '.env')`. Process environment variables take precedence. `.env` and uploaded media are ignored by Git. Local development uses `DEBUG=True` in `.env`; without it, DEBUG defaults to False and a private secret key is required. `SECRET_KEY` is the preferred key variable; `DJANGO_SECRET_KEY` remains a compatibility fallback.
+
+For Vercel, set `MONGODB_URI` (your existing Atlas connection string), `MONGODB_NAME`, `SECRET_KEY` (a private, random value), and `DEBUG=False` in the project environment variables for Production and any Preview deployments, then redeploy. Reuse your existing secret key value when moving to `SECRET_KEY` to preserve sessions. Local hosts and `.vercel.app` hosts are allowed, and HTTPS Vercel origins are trusted for CSRF validation; forms still require CSRF tokens. `DJANGO_ALLOWED_HOSTS` can add custom domains. Configure static/media serving and HTTPS for your deployment; MongoDB settings are unchanged.
 
 MongoDB is the only configured application database. The old `db.sqlite3` is left untouched as a local artifact; the new backend does not read it. Old SQLite users are not automatically migrated to MongoDB.
 
